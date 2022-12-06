@@ -17,7 +17,7 @@ class WeatherController extends AbstractController
                                WeatherRepository $weatherRepository,
                                CityRepository $cityRepository,
                                WeatherUtil $weatherUtil): Response {
-        $cityAndWeather = $weatherUtil->getWeatherForCountryAndCity($country_name, $city_name, $cityRepository, $weatherRepository);
+        $cityAndWeather = $weatherUtil->getWeatherForCountryAndCity($country_name, $city_name);
         return $this->render('weather/city.html.twig', [
             'city' => $cityAndWeather["city"],
             'weather' => $cityAndWeather["weather"]
