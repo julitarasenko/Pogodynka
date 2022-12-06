@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Weather index{% endblock %}
+
+{% block body %}
+    <h1>Weather index</h1>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Temperature</th>
+                <th>Image_id</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Temperature_feel</th>
+                <th>Sunrise</th>
+                <th>Sunset</th>
+                <th>Wind_speed</th>
+                <th>Precipitation</th>
+                <th>Humidity</th>
+                <th>Pressure</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for weather in weather %}
+            <tr>
+                <td>{{ weather.id }}</td>
+                <td>{{ weather.temperature }}</td>
+                <td>{{ weather.imageId }}</td>
+                <td>{{ weather.date ? weather.date|date('Y-m-d') : '' }}</td>
+                <td>{{ weather.time ? weather.time|date('H:i:s') : '' }}</td>
+                <td>{{ weather.temperatureFeel }}</td>
+                <td>{{ weather.sunrise ? weather.sunrise|date('H:i:s') : '' }}</td>
+                <td>{{ weather.sunset ? weather.sunset|date('H:i:s') : '' }}</td>
+                <td>{{ weather.windSpeed }}</td>
+                <td>{{ weather.precipitation }}</td>
+                <td>{{ weather.humidity }}</td>
+                <td>{{ weather.pressure }}</td>
+                <td>
+                    <a href="{{ path('app_weather_show', {'id': weather.id}) }}">show</a>
+                    {% if is_granted('ROLE_WEATHER_EDIT') %}
+                        <a href="{{ path('app_weather_edit', {'id': weather.id}) }}">edit</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if is_granted('ROLE_WEATHER_CREATE') %}
+        <a href="{{ path('app_weather_new') }}">Create new</a>
+    {% endif %}
+
+    <br><br>
+    <a href="{{ path('app_city_index') }}"><button>Go to city index</button></a>
+
+    
+{% endblock %}

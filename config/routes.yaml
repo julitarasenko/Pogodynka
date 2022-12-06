@@ -1,0 +1,10 @@
+# weather_in_city:
+#   path: /weather1/{country}/{city}
+#   controller: App\Controller\WeatherController1::cityAction
+#   requirements:
+#     country_name: a-zA-Z\xA1-\xFF+
+#     city_name: a-zA-Z\xA1-\xFF+
+
+app_logout:
+    path: /login
+    methods: GET
