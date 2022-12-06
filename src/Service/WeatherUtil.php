@@ -12,7 +12,7 @@ class WeatherUtil
                                                 string $city_name, 
                                                 CityRepository $cityRepository, 
                                                 WeatherRepository $weatherRepository): array {
-        $city = $cityRepository->findCityByCountryAndCityName($country_name, $city_name);
+        $city = $cityRepository->findByCountryAndCity($country_name, $city_name);
         $result = $this->getWeatherForLocation($city, $weatherRepository);
         return $result;
     }
